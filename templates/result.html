@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Password Strength Result</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <h1>Password Strength Results</h1>
+
+    <!-- Ring Bar Visualization -->
+    <div id="ring-bar">
+        <span>{{ result['score'] }}%</span>
+    </div>
+
+    <!-- Password Strength and Feedback -->
+    <p>Strength: <strong>{{ result['strength'] }}</strong></p>
+    <ul>
+        {% for feedback in result['feedback'] %}
+        <li>{{ feedback }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Back Button -->
+    <a href="/">Try Another Password</a>
+</body>
+</html>
