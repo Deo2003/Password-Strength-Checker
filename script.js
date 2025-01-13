@@ -3,8 +3,25 @@ async function checkLiveStrength() {
     const feedbackDiv = document.getElementById("live-feedback");
     const ringBar = document.getElementById("ring-bar");
 
-    // Show buffering animation immediately
-    feedbackDiv.innerHTML = "<p>Calculating strength...</p>";
+    // Array of security facts
+    const securityFacts = [
+        "Use a unique password for every account to reduce the impact of a data breach.",
+        "Enable two-factor authentication (2FA) whenever possible for an extra layer of security.",
+        "Avoid using easily guessed passwords like 'password123' or '123456'.",
+        "Longer passwords are stronger; aim for at least 12 characters.",
+        "Avoid using personal information like birthdays in your passwords.",
+        "A password manager can help generate and store secure passwords.",
+        "Change your passwords regularly to enhance account security.",
+        "Beware of phishing emails that try to steal your login credentials.",
+        "Do not reuse passwords across critical accounts.",
+        "Avoid saving passwords in plain text on your devices.",
+    ];
+
+    // Select a random fact
+    const randomFact = securityFacts[Math.floor(Math.random() * securityFacts.length)];
+
+    // Show buffering animation and security fact
+    feedbackDiv.innerHTML = `<p>Calculating strength...</p><p>Tip: ${randomFact}</p>`;
     ringBar.style.background = "conic-gradient(lightgray 0%, lightgray 100%)";
     ringBar.querySelector("span").innerText = "Calculating...";
 
@@ -14,7 +31,7 @@ async function checkLiveStrength() {
         return;
     }
 
-    // Simulate delay for calculation
+    // Simulate delay for calculation (10 seconds)
     setTimeout(async () => {
         try {
             // Fetch results from the Flask backend
@@ -50,5 +67,5 @@ async function checkLiveStrength() {
             feedbackDiv.innerHTML = "<p>An error occurred while calculating strength. Please try again.</p>";
             console.error("Error fetching password strength:", error);
         }
-    }, 1000); // Simulate a 1-second delay
+    }, 10000); // 10-second delay
 }
